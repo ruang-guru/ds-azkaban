@@ -198,7 +198,9 @@ azkaban.FlowExecuteDialogView = Backbone.View.extend({
     this.showExecutionOptionPanel();
 
     // Triggers a render
-    this.model.trigger("change:graph");
+    if (projectName != "all_sql_etl") {
+      this.model.trigger("change:graph");
+    }
   },
 
   showExecuteJob: function (projectName, flowId, jobId, withDep, withDes) {
@@ -223,7 +225,9 @@ azkaban.FlowExecuteDialogView = Backbone.View.extend({
     }
 
     this.showExecutionOptionPanel();
-    this.model.trigger("change:graph");
+    if (projectName != "all_sql_etl") {
+      this.model.trigger("change:graph");
+    }
   },
 
   showExecutionOptionPanel: function () {

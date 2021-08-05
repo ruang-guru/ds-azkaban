@@ -119,17 +119,22 @@ azkaban.FlowTabView = Backbone.View.extend({
   },
 
   handleGraphLinkClick: function () {
-    $("#jobslistViewLink").removeClass("active");
-    $("#graphViewLink").addClass("active");
-    $("#flowLogViewLink").removeClass("active");
-    $("#flowTriggerlistViewLink").removeClass("active");
-    $("#statsViewLink").removeClass("active");
+    if (projectName == "all_sql_etl") {
+      this.handleJobslistLinkClick();
+    } else {
+      $("#jobslistViewLink").removeClass("active");
+      $("#graphViewLink").addClass("active");
+      $("#flowLogViewLink").removeClass("active");
+      $("#flowTriggerlistViewLink").removeClass("active");
+      $("#statsViewLink").removeClass("active");
 
-    $("#jobListView").hide();
-    $("#flowTriggerListView").hide();
-    $("#graphView").show();
-    $("#flowLogView").hide();
-    $("#statsView").hide();
+      $("#jobListView").hide();
+      $("#flowTriggerListView").hide();
+      $("#graphView").show();
+      $("#flowLogView").hide();
+      $("#statsView").hide();
+    }
+
   },
 
   handleFlowTriggerLinkClick: function () {

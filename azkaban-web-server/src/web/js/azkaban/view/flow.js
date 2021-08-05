@@ -605,7 +605,9 @@ var initFlowPage = function (settings) {
   var successHandler = function (data) {
     console.log("data fetched");
     graphModel.addFlow(data);
-    graphModel.trigger("change:graph");
+    if (settings.projectName != "all_sql_etl") {
+      graphModel.trigger("change:graph");
+    }
 
     // Handle the hash changes here so the graph finishes rendering first.
     if (window.location.hash) {
