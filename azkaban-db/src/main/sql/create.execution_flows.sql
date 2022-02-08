@@ -2,7 +2,7 @@ CREATE TABLE execution_flows (
   exec_id     INT          NOT NULL AUTO_INCREMENT,
   project_id  INT          NOT NULL,
   version     INT          NOT NULL,
-  flow_id     VARCHAR(256) NOT NULL,
+  flow_id     VARCHAR(700) NOT NULL,
   status      TINYINT,
   submit_user VARCHAR(64),
   submit_time BIGINT,
