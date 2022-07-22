@@ -92,6 +92,12 @@ docker build -t gcr.io/[project-id]/azkaban-sync:[image-tag] -f Dockerfile-sync 
 docker build -t gcr.io/[project-id]/azkaban-exec:[image-tag] -f Dockerfile-exec .
 docker build -t gcr.io/[project-id]/azkaban-web:[image-tag] -f Dockerfile-web .
 
+# add '--platform linux/amd64' in `docker build` command if you're building in Apple Silicon ([src](https://dev.to/lakhansamani/create-docker-image-on-apple-silicon-m1-mac-2f75))
+# e.g.:
+# docker build --platform linux/amd64 -t gcr.io/[project-id]/azkaban-sync:[image-tag] -f Dockerfile-sync .
+# docker build --platform linux/amd64 -t gcr.io/[project-id]/azkaban-exec:[image-tag] -f Dockerfile-exec .
+# docker build --platform linux/amd64 -t gcr.io/[project-id]/azkaban-web:[image-tag] -f Dockerfile-web .
+
 docker push gcr.io/[project-id]/azkaban-sync:[image-tag]
 docker push gcr.io/[project-id]/azkaban-exec:[image-tag]
 docker push gcr.io/[project-id]/azkaban-web:[image-tag]
