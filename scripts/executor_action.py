@@ -13,10 +13,18 @@ assert action in ('activate', 'deactivate', 'getStatus', 'shutdown')
 
 url = 'http://localhost:12321/executor?action={action}'.format(action=action)
 
+url_activation = 'http://localhost:12321/executor?action=activate'
+
 if action == 'getStatus':
     r = requests.post(url, timeout=5)
-    assert r.status_code == 200
-    assert json.loads(r.text)['isActive'] == 'true'
+    if json.loads(r.text)['isActive'] != 'true' and r.status_code != 200:
+        activate_url = 'http://localhost:12321/executor?action=activate'
+        r_activate = requests.post(activate_url, timeout=5)
+        assert r_activate.status_code == 200
+        assert json.loads(r_activate.text)['status'] == 'success'
+    if r.status_code != 200:
+        raise Exception('Attempt to ' + action + ' executor failed, output:' + r.text)
+
 
 else:
     wait_for_port_ready(12321, 15)
