@@ -16,9 +16,10 @@ def check_exec_pods_stability():
     num_stable_pods = int(getoutput(cmd))
 
     cmd = "kubectl -n [gke-namespace] get po -o wide|grep exec|grep -v Evicted|grep -Ev '0/2.*Terminating'|wc -l"
-    num_all_pods = int(getoutput(cmd))
+    num_evicted_pods = int(getoutput(cmd))
 
-    stable = num_stable_pods == num_all_pods
+    # num_stable_pods >= num_evicted_pods
+    stable = num_stable_pods >= num_evicted_pods
     return stable
 
 

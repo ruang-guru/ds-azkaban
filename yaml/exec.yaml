@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: exec
-        image: gcr.io/[project-id]/azkaban-exec:[image-tag]
+        image:  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-exec:[image-tag]
         ports:
         - containerPort: 12321
         resources:
