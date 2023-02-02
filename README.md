@@ -88,19 +88,19 @@ Things that you need to change:
 ```
 ./gradlew clean build installDist
 
-docker build -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-sync:[image-tag] -f Dockerfile-sync .
-docker build -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-exec:[image-tag] -f Dockerfile-exec .
-docker build -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-web:[image-tag] -f Dockerfile-web .
+DOCKER_HOST=172.16.0.28:2375 docker build -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-sync:[image-tag] -f Dockerfile-sync .
+DOCKER_HOST=172.16.0.28:2375 docker build -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-exec:[image-tag] -f Dockerfile-exec .
+DOCKER_HOST=172.16.0.28:2375 docker build -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-web:[image-tag] -f Dockerfile-web .
 
 # add '--platform linux/amd64' in `docker build` command if you're building in Apple Silicon ([src](https://dev.to/lakhansamani/create-docker-image-on-apple-silicon-m1-mac-2f75))
 # e.g.:
-# docker build --platform linux/amd64 -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-sync:[image-tag] -f Dockerfile-sync .
-# docker build --platform linux/amd64 -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-exec:[image-tag] -f Dockerfile-exec .
-# docker build --platform linux/amd64 -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-web:[image-tag] -f Dockerfile-web .
+# DOCKER_HOST=172.16.0.28:2375 docker build --platform linux/amd64 -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-sync:[image-tag] -f Dockerfile-sync .
+# DOCKER_HOST=172.16.0.28:2375 docker build --platform linux/amd64 -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-exec:[image-tag] -f Dockerfile-exec .
+# DOCKER_HOST=172.16.0.28:2375 docker build --platform linux/amd64 -t  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-web:[image-tag] -f Dockerfile-web .
 
-docker push  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-sync:[image-tag]
-docker push  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-exec:[image-tag]
-docker push  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-web:[image-tag]
+DOCKER_HOST=172.16.0.28:2375 docker push  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-sync:[image-tag]
+DOCKER_HOST=172.16.0.28:2375 docker push  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-exec:[image-tag]
+DOCKER_HOST=172.16.0.28:2375 docker push  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-web:[image-tag]
 
 kubectl -n [gke-namespace] apply -f yaml/
 ```
