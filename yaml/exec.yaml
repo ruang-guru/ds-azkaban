@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: exec
-        image: gcr.io/[project-id]/azkaban-exec:[image-tag]
+        image:  asia-southeast1-docker.pkg.dev/[project-id]/data-engineering/azkaban-exec:[image-tag]
         ports:
         - containerPort: 12321
         resources:
           requests:
-            memory: "20G"
-            cpu: "6500m"
+            memory: "14G"
+            cpu: "1800m"
         livenessProbe:
           failureThreshold: 5
           exec:
