@@ -15,7 +15,7 @@ def check_exec_pods_stability():
     cmd = 'kubectl -n [gke-namespace] get po -o wide|grep exec|grep 2/2|grep Running|wc -l'
     num_stable_pods = int(getoutput(cmd))
 
-    cmd = "kubectl -n [gke-namespace] get deployment exec -o jsonpath=\"{@.spec.replica}\""
+    cmd = "kubectl -n [gke-namespace] get deployment exec -o jsonpath=\"{@.spec.replicas}\""
     num_all_pods = int(getoutput(cmd))
 
     # num_stable_pods >= num_evicted_pods
