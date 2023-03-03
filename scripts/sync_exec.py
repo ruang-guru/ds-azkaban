@@ -32,6 +32,16 @@ def clean_evicted_pods():
         cmd = 'kubectl -n [gke-namespace] delete po {} --force --grace-period=0'.format(pod)
         print(getoutput(cmd))
 
+def clean_stuck_pods():
+    cmd = "kubectl -n [gke-namespace] get po -lapp=exec|grep -v Running|grep -v 2/2|awk '{print $1}'"
+    result = getoutput(cmd).split('\n')
+    result = filter(lambda l:len(l) > 0, result)
+    for pod in result:
+        print('cleaning pod', pod)
+        cmd = 'kubectl -n [gke-namespace] delete po {} --force --grace-period=0'.format(pod)
+        print(getoutput(cmd))
+    cmd = 'kubectl -n [gke-namespace] rollout restart deploy web'
+    print(getoutput(cmd))
 
 def clean_terminating_pods():
     cmd = "kubectl -n [gke-namespace] get po|grep Terminating|grep 0/2|awk '{print $1}'"
@@ -84,6 +94,9 @@ while True:
         print('cleaning terminating pods..')
         clean_terminating_pods()
         
+        print('cleaning half pods..')
+        clean_stuck_pods()
+
         # wait for pods are stable
         stable = check_exec_pods_stability()
         while not stable:
