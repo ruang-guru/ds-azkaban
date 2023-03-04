@@ -41,7 +41,7 @@ def clean_stuck_pods():
         print('cleaning pod', pod)
         cmd = 'kubectl -n [gke-namespace] delete po {} --force --grace-period=0'.format(pod)
         print(getoutput(cmd))
-    if len_result > 0:
+    if len_result > 1:
         cmd = 'kubectl -n [gke-namespace] rollout restart deploy web'
         print(getoutput(cmd))
 
