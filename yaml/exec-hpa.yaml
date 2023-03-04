@@ -7,10 +7,10 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: exec
-  minReplicas: 2
-  maxReplicas: 10
+  minReplicas: 5
+  maxReplicas: 14
   metrics:
   - type: Resource
     resource:
       name: memory
-      targetAverageUtilization: 65
+      targetAverageUtilization: 50
