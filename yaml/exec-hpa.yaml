@@ -12,5 +12,5 @@ spec:
   metrics:
   - type: Resource
     resource:
-      name: cpu
-      targetAverageUtilization: 50
+      name: memory
+      targetAverageUtilization: 65
