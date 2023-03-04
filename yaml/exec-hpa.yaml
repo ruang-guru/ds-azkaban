@@ -8,9 +8,9 @@ spec:
     kind: Deployment
     name: exec
   minReplicas: 5
-  maxReplicas: 14
+  maxReplicas: 17
   metrics:
   - type: Resource
     resource:
-      name: memory
-      targetAverageUtilization: 50
+      name: cpu
+      targetAverageUtilization: 62
