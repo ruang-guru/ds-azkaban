@@ -32,6 +32,18 @@ def clean_evicted_pods():
         cmd = 'kubectl -n [gke-namespace] delete po {} --force --grace-period=0'.format(pod)
         print(getoutput(cmd))
 
+def clean_stuck_pods():
+    cmd = "kubectl -n [gke-namespace] get po -lapp=exec|grep -v Running|grep -v 2/2|awk '{print $1}'"
+    result = getoutput(cmd).split('\n')
+    len_result = len(result)
+    result = filter(lambda l:len(l) > 0, result)
+    for pod in result:
+        print('cleaning pod', pod)
+        cmd = 'kubectl -n [gke-namespace] delete po {} --force --grace-period=0'.format(pod)
+        print(getoutput(cmd))
+    if len_result > 1:
+        cmd = 'kubectl -n [gke-namespace] rollout restart deploy web'
+        print(getoutput(cmd))
 
 def clean_terminating_pods():
     cmd = "kubectl -n [gke-namespace] get po|grep Terminating|grep 0/2|awk '{print $1}'"
@@ -51,7 +63,7 @@ print(getoutput(cmd))
 # activate service account and kubectl
 cmd = 'gcloud auth activate-service-account --key-file=/secrets/credential.json'
 print(getoutput(cmd))
-cmd = 'gcloud container clusters get-credentials [cluster-name] --zone asia-southeast1 --project {}'.format(sys.argv[1])
+cmd = 'gcloud container clusters get-credentials ase1-glo-data-1 --zone asia-southeast1 --project {}'.format(sys.argv[1])
 print(getoutput(cmd))
 
 wait_for_port_ready(3306, 15)
@@ -84,6 +96,9 @@ while True:
         print('cleaning terminating pods..')
         clean_terminating_pods()
         
+        print('cleaning half pods..')
+        clean_stuck_pods()
+
         # wait for pods are stable
         stable = check_exec_pods_stability()
         while not stable:
