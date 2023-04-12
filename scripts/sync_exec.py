@@ -18,6 +18,17 @@ def check_exec_pods_stability():
     cmd = "kubectl -n [gke-namespace] get deployment exec -o jsonpath=\"{@.spec.replicas}\""
     num_all_pods = int(getoutput(cmd))
 
+        # delete if there is an exception on logs
+    cmd = "kubectl -n [gke-namespace] get po -lapp=exec|grep Running|grep 1/2|awk '{print $1}'"
+    result = getoutput(cmd).split('\n')
+
+    for pod in result:
+        cmd_get_logs = 'kubectl -n [gke-namespace] logs {} -c exec'.format(pod)
+        logs = getoutput(cmd_get_logs + '|tail -n 100')
+        if "Exception" in logs:
+            cmd = 'kubectl -n [gke-namespace] delete po {} --force --grace-period=0'.format(pod)
+            print(getoutput(cmd))
+
     # num_stable_pods >= num_evicted_pods
     stable = num_stable_pods >= num_all_pods
     return stable
