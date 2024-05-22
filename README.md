@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.com/azkaban/azkaban.svg?branch=master)](https://travis-ci.com/azkaban/azkaban)[![codecov.io](https://codecov.io/github/azkaban/azkaban/branch/master/graph/badge.svg)](https://codecov.io/github/azkaban/azkaban)[![Join the chat at https://gitter.im/azkaban-workflow-engine/Lobby](https://badges.gitter.im/azkaban-workflow-engine/Lobby.svg)](https://gitter.im/azkaban-workflow-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)[![Documentation Status](https://readthedocs.org/projects/azkaban/badge/?version=latest)](http://azkaban.readthedocs.org/en/latest/?badge=latest)
 
+This azkaban version is default azkaban plus azkaban-sync.
+If you want to read about azkaban, you can read from [this link](https://github.com/ruang-guru/ds-azkaban/blob/4.0.0-k8s/docs/containerization-design.rst). 
+The detail of azkaban-sync documentation can be seen from [this link](https://ruanggguru.atlassian.net/wiki/spaces/SD/pages/3328344087/Self+Healing+System)
 
 ## Build
 Azkaban builds use Gradle and requires Java 8 or higher.
